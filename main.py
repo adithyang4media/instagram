@@ -18,6 +18,14 @@ logger = logging.getLogger(__name__)
 
 TOKEN = os.environ['bottoken']
 
+def start(update, context):
+    """Send a message when the command /start is issued."""
+    update.message.reply_text('Hi!')
+    update.message.reply_text('I Am Online')
+    update.message.reply_text('This Bot Was Made By @g4_media')
+    update.message.reply_text('Please Consider Subscribing our Youtube Channel https://www.youtube.com/channel/UCad4U0t57KqjvHxqqdmZW_w')
+
+
 def download(bot, update):
     message = update.effective_message
     instagram_post = message.text
@@ -62,6 +70,7 @@ def main():
     updater = Updater(TOKEN)
     dp = updater.dispatcher
     logger.info("Setting Up MessageHandler")
+    dp.add_handler(CommandHandler("start", start))
     dp.add_handler(MessageHandler(Filters.text, download))
     updater.start_polling()
     logging.info("Starting Long Polling!")
